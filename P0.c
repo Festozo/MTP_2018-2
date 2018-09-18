@@ -1,5 +1,5 @@
 /*P0.c*/
-/*Vinícius Carvalho Festozo*/
+/*VinÃ­cius Carvalho Festozo*/
 /*11811EEL018*/
 
 #include <stdio.h>
