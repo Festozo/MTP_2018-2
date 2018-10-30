@@ -1,6 +1,6 @@
 /*P1.c*/
-*/Vinicius Carvalho Festozo*/
-*/11811EEL018*/
+/*Vinicius Carvalho Festozo*/
+/*11811EEL018*/
 
 
 
