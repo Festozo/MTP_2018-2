@@ -1,9 +1,10 @@
+/*P5.c*/
+/*Vinicius Carvalho Festozo*/
+/*11811EEL018*/
+
+
+
 #include <stdio.h>
-
-
-
-
-
 typedef
 	unsigned long long int
 Bytes8;
