@@ -1,3 +1,11 @@
+/*P6.c*/
+/*Vinícius Carvalho Festozo*/
+/*11811EEL018*/
+
+
+
+
+
 #include<math.h>
 #include<stdlib.h>
 #include<stdio.h>
