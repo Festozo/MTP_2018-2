@@ -19,7 +19,7 @@ void aparece_p (ponto *p_inicial, ponto *p_final)
 	if(p_final > p_inicial)
 	{
 		printf("\n\n");
-		printf("(%.2f , %.2f)", p_inicial->x , p_inicial->y);
+		printf("(%.3f , %.3f)", p_inicial->x , p_inicial->y);
 		aparece_p(p_inicial+1, p_final);
 	}
 }
