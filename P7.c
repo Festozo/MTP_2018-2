@@ -2,36 +2,29 @@
 /* Vinicius Carvalho Festozo */
 /* 11811EEL018 */
 
-
-
-
-
-
-
-
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 
 typedef
-    struct ponto{double x,y;}
+    struct   ponto{double x,y;}
 ponto;
 
-ponto * gerar_pontos(int N) {
-    ponto * coordenadas = (ponto *) calloc(N,sizeof(ponto));
+ponto * make_p(int k) {
+    ponto * p = (ponto *) calloc(k,sizeof(ponto));
     int i;
-    for(i = 0; i < N; i++){
-        coordenadas[i].x = cos(i*2.0*M_PI/(N-1));
-        coordenadas[i].y = sin(i*2.0*M_PI/(N-1));
+    for(i = 0; i < k; i++){
+        p[i].x = cos(i*2.0*M_PI/(k-1));
+        p[i].y = sin(i*2.0*M_PI/(k-1));
     }
-    return coordenadas;
+	return p;
 }
 
-void mostrar_pontos(ponto * p_ini, ponto * p_fim) {
-    if(p_ini < p_fim) {
-        printf("(%.3lf, %.3lf) ", p_ini->x, p_ini->y);
-        mostrar_pontos(p_ini+1, p_fim);
+void aparece_p(ponto * p_inicial, ponto * p_final) {
+    if(p_inicial < p_final) {
+        printf("(%.3lf, %.3lf) ", p_inicial->x, p_inicial->y);
+        aparece_p(p_inicial+1, p_final);
     }
 }
 
@@ -43,42 +36,43 @@ void gravar_pontos(ponto * pini, int N) {
 }
 
 
-ponto * ler_pontos(char * nome_arquivo, unsigned int * pN) {
-    ponto * coordenadas = (ponto *) malloc(sizeof(ponto));
-    unsigned int N = 0;
+ponto * ler_pontos(char * nome_arquivo, unsigned int * pk) {
+    ponto * p = (ponto *) malloc(sizeof(ponto));
+    unsigned int k = 0;
     FILE * arquivo;
     arquivo = fopen(nome_arquivo, "rb");
     while(1) {
-        fread(coordenadas, 1, sizeof(ponto), arquivo);
+        fread(p, 1, sizeof(ponto), arquivo);
         if(feof(arquivo)) break;
-        N++;
+        k++;
     }
     rewind(arquivo);
-    coordenadas = (ponto *) realloc(coordenadas, N*sizeof(ponto));
-    fread(coordenadas, N, sizeof(ponto), arquivo);
+    p = (ponto *) realloc(p, k*sizeof(ponto));
+    fread(p, k, sizeof(ponto), arquivo);
     fclose(arquivo);
-    *pN = N;
-    return coordenadas;
+    *pk = k;
+    return p;
 }
 
 
 int main(){
     
-	unsigned int N, opc;
-    ponto *coordenadas;
-	printf("1-Salvar arquivo; 2 - Ler  o arquivo: ");
+       unsigned int k, opc;
+    ponto *p;
+	printf("1-Salvar arquivo; 2 - Vizualizar o aquivo salvo: ");
     scanf("%u",&opc); 
 	getchar();
     if(opc == 2) {
-        coordenadas = ler_pontos("pontos.dat", &N);
-        mostrar_pontos(coordenadas, coordenadas + N);
+        p = ler_pontos("pontos.dat", &k);
+        aparece_p(p, p + k);
     } else {
-        printf("Digite o número de pontos: ");
-		scanf("%u", &N); getchar();
-        coordenadas = gerar_pontos(N);
-        gravar_pontos(coordenadas, N);
-        printf("Salvo!");
+        printf("Digite a quantidade desejada de pontos: ");
+	scanf("%u", &k); 
+	getchar();
+        p=make_p(k);
+        gravar_pontos(p,k);
+        printf("\n\nArquivo gravado !!");
     }
-    free(coordenadas);
+    free(p);
     return 0;
 }
